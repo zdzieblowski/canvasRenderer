@@ -1,9 +1,10 @@
-export default class CRAlgorithms{
+export default class CR_Algorithms{
     algo0(cr) {
         var grid = 16;
         for(var x = 0; x <= cr.canvas.width/grid; x++){
-            for(var y = 0; y <= cr.canvas.height/grid; y++){
+            for(var y = 0; y <= cr.canvas.height/grid; y++){                
                 var a = 64+Math.random()*128;
+
                 cr.context.fillStyle = `rgb(${a},${a},${a},1)`;
                 cr.context.fillRect(x*grid, y*grid, grid, grid);
             }
