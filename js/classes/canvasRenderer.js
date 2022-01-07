@@ -14,6 +14,11 @@ export default class CanvasRenderer {
             this.mouseY = event.offsetY;
         }
 
+        this.canvas.ontouchmove = event => {
+            this.mouseX = event.changedTouches[0].pageX;
+            this.mouseY = event.changedTouches[0].pageY;
+        }
+
         this.#renderLoop();
     }
 
