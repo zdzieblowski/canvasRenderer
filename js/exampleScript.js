@@ -5,7 +5,7 @@ var cr = new CanvasRenderer(document.getElementById('HTML_CANVAS_ELEMENT'));
 var crAlgo = new CR_Algorithms();
 
 cr.algorithm = function() {
-    crAlgo.algo1(cr);
+    crAlgo.algo2(cr);
 };
 
 window.onresize = event => {
