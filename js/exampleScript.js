@@ -1,7 +1,7 @@
 import CanvasRenderer from './classes/canvasRenderer.js';
 import CR_Algorithms from './exampleAlgorithms.js';
 
-var cr = new CanvasRenderer(document.getElementById('HTML_CANVAS_ELEMENT'));
+var cr = new CanvasRenderer(document.getElementById('HTML_CANVAS_ELEMENT'), 60, false);
 var crAlgo = new CR_Algorithms();
 
 cr.algorithm = function() {
