@@ -10,17 +10,24 @@ export default class CanvasRenderer {
     fps;
     time = performance.now();
 
-    constructor(canvasElement, requestedFPS, debug = false){
+    alpha;
+
+    constructor(canvasElement, requestedFPS, debug = false, i_alpha = false, i_antialias = true){
         if(requestedFPS>0){
             this.frameTime = 1000/requestedFPS;
         } else {
             this.frameTime = 1;
         }
 
+        this.alpha = i_alpha;
+
         this.debug = debug;
 
         this.canvas = canvasElement;
-        this.context = this.canvas.getContext('2d');
+        this.context = this.canvas.getContext('2d', {
+            antialias: i_antialias,
+            alpha: i_alpha
+        });
 
         this.canvas.onmousemove = event => {
             this.mouseX = event.pageX;
@@ -44,7 +51,6 @@ export default class CanvasRenderer {
     #renderLoop(){
         if(performance.now() - this.time >= this.frameTime){
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
             this.algorithm();
 
             this.time = performance.now();
