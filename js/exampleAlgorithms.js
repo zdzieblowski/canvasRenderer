@@ -60,7 +60,7 @@ export default class CR_Algorithms{
             for(var y = 0; y <= hp; y++){
                 cr.context.beginPath();
                 
-                cr.context.strokeStyle = `rgb(${x*cwp},${y*chp},${255-x*cwp},0.1)`;
+                cr.context.strokeStyle = `rgb(${x*cwp},${y*chp},${255-x*cwp},1)`;
                 
                 var vecx = cr.mouseX-x*grid;
                 var vecy = cr.mouseY-y*grid;
