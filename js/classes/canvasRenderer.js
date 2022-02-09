@@ -12,7 +12,7 @@ export default class CanvasRenderer {
     alpha;
     looping;
 
-    constructor(canvasElement, requestedFPS = 60, i_debug = false, i_alpha = false, i_antialias = false, i_looping = true){
+    constructor(canvasElement, requestedFPS = 60, i_debug = false, i_alpha = false, i_antialias = false, i_looping = true, i_w = 0, i_h = 0){
         if(requestedFPS > 0){
             this.frameTime = 1000 / requestedFPS;
         } else {
@@ -22,24 +22,33 @@ export default class CanvasRenderer {
         this.alpha = i_alpha;
         this.looping = i_looping;
 
+        this.targetWidth = i_w;
+        this.targetHeight = i_h;
+
         this.debug = i_debug;
 
         this.canvas = canvasElement;
+        this.updateRendererSize(i_w,i_h);
+
         this.context = this.canvas.getContext('2d', {
             antialias: i_antialias,
             alpha: i_alpha
         });
 
         this.canvas.onmousemove = event => {
-            this.#dlog(`mouse x: ${event.pageX} mouse y: ${event.pageY}`);
-            this.mouseX = event.pageX;
-            this.mouseY = event.pageY;
+            var rect = this.canvas.getBoundingClientRect();
+            this.#dlog(`mouse x: ${event.clientX - rect.left} mouse y: ${event.clientY - rect.top}`);
+            
+            this.mouseX = event.clientX - rect.left;
+            this.mouseY = event.clientY - rect.top;
         }
 
         this.canvas.ontouchmove = event => {
-            this.#dlog(`touch x: ${event.changedTouches[0].pageX} touch y: ${event.changedTouches[0].pageY}`);
-            this.mouseX = event.changedTouches[0].pageX;
-            this.mouseY = event.changedTouches[0].pageY;
+            var rect = this.canvas.getBoundingClientRect();
+            this.#dlog(`touch x: ${event.changedTouches[0].clientX - rect.left} touch y: ${event.changedTouches[0].clientY - rect.top}`);
+            
+            this.mouseX = event.changedTouches[0].clientX - rect.left;
+            this.mouseY = event.changedTouches[0].clientY - rect.top;
         }
 
         setTimeout(() => { this.#renderLoop(); }, 100);
@@ -73,9 +82,8 @@ export default class CanvasRenderer {
 
     algorithm(){}
 
-    updateScreen(){
-        this.#dlog(`canvas resize: ${window.innerWidth} / ${window.innerHeight} px`);
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+    updateRendererSize(w, h){
+        this.canvas.width = w;
+        this.canvas.height = h;
     }
 }
