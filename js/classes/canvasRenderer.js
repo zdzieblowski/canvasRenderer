@@ -81,11 +81,15 @@ export default class CanvasRenderer {
 
     setPixel(x, y, r, g, b, a) {
         this.context.fillStyle = `rgba(${r},${g},${b},${a})`;
-        this.context.fillRect(x,y,1,1);        
+        this.context.fillRect(x, y, 1, 1);        
     }
 
     updateRendererSize(w, h) {
         this.canvas.width = w;
         this.canvas.height = h;
+        
+        if(!this.looping){
+            this.#renderLoop();
+        }
     }
 }

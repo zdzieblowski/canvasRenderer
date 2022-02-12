@@ -67,6 +67,7 @@ cr3.algorithm = function() {
 //
 
 window.onresize = event => {
+    cr0.updateRendererSize(window.innerWidth,200);
     cr1.updateRendererSize(window.innerWidth,200);
     cr2.updateRendererSize(window.innerWidth,200);
     cr3.updateRendererSize(window.innerWidth,200);
