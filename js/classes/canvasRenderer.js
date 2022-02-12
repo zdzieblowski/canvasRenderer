@@ -12,8 +12,8 @@ export default class CanvasRenderer {
     alpha;
     looping;
 
-    constructor(canvasElement, requestedFPS = 60, i_debug = false, i_alpha = false, i_antialias = false, i_looping = true, i_w = 0, i_h = 0){
-        if(requestedFPS > 0){
+    constructor(canvasElement, requestedFPS = 60, i_debug = false, i_alpha = false, i_antialias = false, i_looping = true, i_w = 0, i_h = 0) {
+        if(requestedFPS > 0) {
             this.frameTime = 1000 / requestedFPS;
         } else {
             this.frameTime = 1;
@@ -28,12 +28,9 @@ export default class CanvasRenderer {
         this.debug = i_debug;
 
         this.canvas = canvasElement;
-        this.updateRendererSize(i_w,i_h);
+        this.updateRendererSize(i_w, i_h);
 
-        this.context = this.canvas.getContext('2d', {
-            antialias: i_antialias,
-            alpha: i_alpha
-        });
+        this.context = this.canvas.getContext('2d', {antialias: i_antialias, alpha: i_alpha});
 
         this.canvas.onmousemove = event => {
             var rect = this.canvas.getBoundingClientRect();
@@ -51,38 +48,43 @@ export default class CanvasRenderer {
             this.mouseY = event.changedTouches[0].clientY - rect.top;
         }
 
-        setTimeout(() => { this.#renderLoop(); }, 100);
+        setTimeout(() => {this.#renderLoop();}, 100);
         this.#dlog(this);
     }
 
     #dlog(input) {
-        if(this.debug){
+        if(this.debug) {
             console.log(input);
         }
     }
 
-    #renderLoop(){
-        if(performance.now() - this.time >= this.frameTime){
-            if(this.alpha){
-            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        }else{
-            this.context.fillStyle = 'rgba(0,0,0,1)';
-            this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        }
+    #renderLoop() {
+        if(performance.now() - this.time >= this.frameTime) {
+            if(this.alpha) {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            } else {
+                this.context.fillStyle = 'rgba(0,0,0,1)';
+                this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            }
             this.#dlog(`canvas redraw`);
             this.algorithm();
 
             this.time = performance.now();
-            
         }
-        if(this.looping){
+
+        if(this.looping) {
             requestAnimationFrame(this.#renderLoop.bind(this));
         }
     }
 
-    algorithm(){}
+    algorithm() {}
 
-    updateRendererSize(w, h){
+    setPixel(x, y, r, g, b, a) {
+        this.context.fillStyle = `rgba(${r},${g},${b},${a})`;
+        this.context.fillRect(x,y,1,1);        
+    }
+
+    updateRendererSize(w, h) {
         this.canvas.width = w;
         this.canvas.height = h;
     }

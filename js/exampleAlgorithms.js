@@ -1,6 +1,6 @@
 export default class CR_Algorithms{
     algo0(cr) {
-        var grid = 16;
+        var grid = 10;
         for(var x = 0; x <= cr.canvas.width/grid; x++){
             for(var y = 0; y <= cr.canvas.height/grid; y++){                
                 var a = 64+Math.random()*128;
@@ -12,7 +12,7 @@ export default class CR_Algorithms{
     }
 
     algo1(cr) {
-        var grid = 16;
+        var grid = 10;
     
         var wp = Math.ceil(cr.canvas.width/grid);
         var hp = Math.ceil(cr.canvas.height/grid);
@@ -46,7 +46,7 @@ export default class CR_Algorithms{
     }
 
     algo2(cr) {
-        var grid = 16;
+        var grid = 10;
     
         var wp = Math.ceil(cr.canvas.width/grid);
         var hp = Math.ceil(cr.canvas.height/grid);
