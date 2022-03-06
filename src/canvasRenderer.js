@@ -1,4 +1,6 @@
 export default class CanvasRenderer {
+    version="0.0.1";
+
     canvas;
     context;
 

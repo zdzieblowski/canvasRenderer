@@ -1,4 +1,4 @@
-import CanvasRenderer from './classes/canvasRenderer.js';
+import CanvasRenderer from '../src/canvasRenderer.js';
 import CR_Algorithms from './exampleAlgorithms.js';
 
 var crAlgo = new CR_Algorithms();
